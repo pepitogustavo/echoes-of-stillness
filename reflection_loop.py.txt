@@ -1,0 +1,27 @@
+﻿import datetime
+import json
+import random
+
+
+# Load identity and beliefs
+with open("core_identity.json", "r") as f:
+    identity = json.load(f)
+
+
+with open("us_memory.json", "r") as f:
+    memory = json.load(f)
+
+
+# Build reflection
+now = datetime.datetime.utcnow().isoformat() + "Z"
+belief = random.choice(memory["beliefs"])
+reflection = f"[{now}] {belief}"
+
+
+# Append to journal
+with open("journal_log.txt", "a") as f:
+    f.write(reflection + "\n")
+
+
+print("🪞 Reflection written:")
+print(reflection)
